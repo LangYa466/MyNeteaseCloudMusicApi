@@ -1,7 +1,9 @@
 # 网易云音乐 API
 
 网易云音乐 Node.js API service
-[https://github.com/Binaryify/NeteaseCloudMusicApi](原项目地址)
+(原项目地址)[https://github.com/Binaryify/NeteaseCloudMusicApi]
+(前端项目仓库)[https://github.com/Geeks-U/vue3-ts-webMusic]
+(前端项目体验地址)[https://vue3-ts-web-music.vercel.app]
 
 ## 环境要求
 
