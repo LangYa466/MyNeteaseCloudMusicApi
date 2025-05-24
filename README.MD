@@ -8,6 +8,8 @@
 
 [前端项目体验地址](https://vue3-ts-web-music.vercel.app)
 
+[replit部署体验地址](https://replit.com/@cncdre11/NeteaseCloudMusicApi)
+
 ## 环境要求
 
 需要 NodeJS 8.12+ 环境
