@@ -29,7 +29,7 @@
   "main": "main.js",
   "types": "./interface.d.ts",
   "engines": {
-    "node": ">=12"
+    "node": "18.x"
   },
   "lint-staged": {
     "*.js": [
