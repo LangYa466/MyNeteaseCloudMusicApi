@@ -275,38 +275,21 @@ async function consturctServer(moduleDefs) {
   return app
 }
 
-/**
- * Serve the NCM API.
- * @param {NcmApiOptions} options
- * @returns {Promise<import('express').Express & ExpressExtension>}
- */
 async function serveNcmApi(options) {
-  const checkVersionSubmission =
-    options.checkVersion &&
-    checkVersion().then(({ npmVersion, ourVersion, status }) => {
-      if (status == VERSION_CHECK_RESULT.NOT_LATEST) {
-        console.log(
-          `最新版本: ${npmVersion}, 当前版本: ${ourVersion}, 请及时更新`,
-        )
-      }
-    });
+  const app = options.app || require('express')(); // 使用传入的 app 或新建
 
-  const constructServerSubmission = consturctServer(options.moduleDefs);
+  await consturctServer(options.moduleDefs, app); // 注意这里传入 app
 
-  const [_, app] = await Promise.all([
-    checkVersionSubmission,
-    constructServerSubmission,
-  ]);
+  // 检查版本
+  if (options.checkVersion) {
+    const { npmVersion, ourVersion, status } = await checkVersion();
+    if (status === VERSION_CHECK_RESULT.NOT_LATEST) {
+      console.log(`最新版本: ${npmVersion}, 当前版本: ${ourVersion}, 请及时更新`);
+    }
+  }
 
-  /** @type {import('express').Express & ExpressExtension} */
-  const appExt = app;
-
-  // 不再监听端口
-  // appExt.server = app.listen(port, host, () => {
-  //   console.log(`server running @ http://${host ? host : 'localhost'}:${port}`);
-  // });
-
-  return appExt;
+  // 不调用 listen()
+  return app;
 }
 
 module.exports = {
