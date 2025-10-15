@@ -129,10 +129,11 @@ async function checkVersion() {
  * Construct the server of NCM API.
  *
  * @param {ModuleDefinition[]} [moduleDefs] Customized module definitions [advanced]
+ * @param {import('express').Express} [existingApp] Optional existing Express app to attach routes to.
  * @returns {Promise<import("express").Express>} The server instance.
  */
-async function consturctServer(moduleDefs) {
-  const app = express()
+async function consturctServer(moduleDefs, existingApp) {
+  const app = existingApp || express()
   app.set('trust proxy', true)
 
   /**
