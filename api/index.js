@@ -1,7 +1,10 @@
 const express = require('express');
-const { serveNcmApi } = require('../server'); // 保持原来的路径
+const { serveNcmApi } = require('../server');
 
 const app = express();
-serveNcmApi({ checkVersion: true, app }); // 不让它调用 app.listen()
+
+serveNcmApi({ checkVersion: true, app })
+  .then(() => console.log('NeteaseCloudMusicApi ready'))
+  .catch(console.error);
 
 module.exports = app;
